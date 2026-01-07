@@ -1,24 +1,30 @@
 <!DOCTYPE html>
-<html>
+<html lang="fr">
 <head>
-  <title>Commander</title>
+  <meta charset="UTF-8">
+  <title>Commande Acheteur</title>
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-<div class="container">
-  <h2>Commander du poisson frais 🐟</h2>
+  <div class="container">
+    <h1>🛒 Commander du poisson frais</h1>
 
-  <input id="name" placeholder="Nom du client">
-  <input id="product" placeholder="Produit">
-  <input id="quantity" type="number" placeholder="Quantité">
-  <input id="deliveryDate" type="date">
-  <input id="address" placeholder="Adresse de livraison">
-  <input id="phone" placeholder="Numéro de contact">
+    <form id="orderForm">
+      <input type="text" id="name" placeholder="Nom" required>
+      <input type="text" id="product" placeholder="Produit" required>
+      <input type="number" id="quantity" placeholder="Quantité" required>
+      <input type="date" id="deliveryDate" required>
+      <input type="text" id="address" placeholder="Adresse" required>
+      <input type="tel" id="phone" placeholder="Téléphone" required>
 
-  <button id="sendBtn">Passer la commande</button>
-</div>
+      <button type="submit">Commander</button>
+    </form>
 
-<script type="module" src="client.js"></script>
+    <p id="result"></p>
+  </div>
+
+  <!-- IMPORTANT -->
+  <script type="module" src="client.js"></script>
 </body>
 </html>

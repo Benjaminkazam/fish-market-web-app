@@ -1,16 +1,31 @@
 <!DOCTYPE html>
-<html>
+<html lang="fr">
 <head>
-  <title>Commandes</title>
+  <meta charset="UTF-8">
+  <title>Page Vendeur</title>
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-<div class="container">
-  <h2>Commandes clients</h2>
-  <div id="orders"></div>
-</div>
+  <div class="container" style="width: 90%;">
+    <h1>📦 Commandes des clients</h1>
 
-<script type="module" src="admin.js"></script>
+    <table id="ordersTable">
+      <thead>
+        <tr>
+          <th>Nom</th>
+          <th>Produit</th>
+          <th>Quantité</th>
+          <th>Livraison</th>
+          <th>Adresse</th>
+          <th>Téléphone</th>
+          <th>Date commande</th>
+        </tr>
+      </thead>
+      <tbody></tbody>
+    </table>
+  </div>
+
+  <script type="module" src="admin.js"></script>
 </body>
 </html>

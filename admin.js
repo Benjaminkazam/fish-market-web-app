@@ -1,5 +1,5 @@
 import { initializeApp } from "https://www.gstatic.com/firebasejs/9.23.0/firebase-app.js";
-import { getDatabase, ref, onChildAdded } from "https://www.gstatic.com/firebasejs/9.23.0/firebase-database.js";
+import { getDatabase, ref, onValue } from "https://www.gstatic.com/firebasejs/9.23.0/firebase-database.js";
 
 const firebaseConfig = {
   apiKey: "AIzaSyAm8DR4ul2w-80xfo8uhzpTskaWvO_MwhU",
@@ -12,22 +12,28 @@ const firebaseConfig = {
 };
 
 const app = initializeApp(firebaseConfig);
-const db = getDatabase(app);
+const database = getDatabase(app);
 
-const ordersDiv = document.getElementById("orders");
+const tableBody = document.querySelector("#ordersTable tbody");
 
-onChildAdded(ref(db, "orders"), (snapshot) => {
-  const o = snapshot.val();
+onValue(ref(database, "orders"), (snapshot) => {
+  tableBody.innerHTML = "";
 
-  ordersDiv.innerHTML += `
-    <div class="order-card">
-      <strong>${o.name}</strong><br>
-      Produit : ${o.product}<br>
-      Quantité : ${o.quantity}<br>
-      Livraison : ${o.deliveryDate}<br>
-      Adresse : ${o.address}<br>
-      Téléphone : ${o.phone}<br>
-      <small>Commande passée le ${o.time}</small>
-    </div>
-  `;
+  snapshot.forEach(child => {
+    const o = child.val();
+
+    const row = `
+      <tr>
+        <td>${o.name}</td>
+        <td>${o.product}</td>
+        <td>${o.quantity}</td>
+        <td>${o.deliveryDate}</td>
+        <td>${o.address}</td>
+        <td>${o.phone}</td>
+        <td>${o.createdAt}</td>
+      </tr>
+    `;
+
+    tableBody.innerHTML += row;
+  });
 });

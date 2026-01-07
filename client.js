@@ -12,20 +12,30 @@ const firebaseConfig = {
 };
 
 const app = initializeApp(firebaseConfig);
-const db = getDatabase(app);
+const database = getDatabase(app);
 
-document.getElementById("sendBtn").addEventListener("click", () => {
+const form = document.getElementById("orderForm");
+const result = document.getElementById("result");
+
+form.addEventListener("submit", (e) => {
+  e.preventDefault();
+
   const order = {
-    name: name.value,
-    product: product.value,
-    quantity: quantity.value,
-    deliveryDate: deliveryDate.value,
-    address: address.value,
-    phone: phone.value,
-    time: new Date().toLocaleString()
+    name: document.getElementById("name").value,
+    product: document.getElementById("product").value,
+    quantity: document.getElementById("quantity").value,
+    deliveryDate: document.getElementById("deliveryDate").value,
+    address: document.getElementById("address").value,
+    phone: document.getElementById("phone").value,
+    createdAt: new Date().toLocaleString()
   };
 
-  push(ref(db, "orders"), order).then(() => {
-    alert("Commande envoyée avec succès !");
-  });
+  push(ref(database, "orders"), order)
+    .then(() => {
+      result.textContent = " Commande envoyée avec succès";
+      form.reset();
+    })
+    .catch((error) => {
+      result.textContent = " Erreur : " + error.message;
+    });
 });
