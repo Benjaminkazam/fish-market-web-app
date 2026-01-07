@@ -1,3 +1,4 @@
+import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/9.23.0/firebase-auth.js";
 import { initializeApp } from "https://www.gstatic.com/firebasejs/9.23.0/firebase-app.js";
 import { getDatabase, ref, onValue } from "https://www.gstatic.com/firebasejs/9.23.0/firebase-database.js";
 
@@ -11,7 +12,15 @@ const firebaseConfig = {
   appId: "1:305612877784:web:71cb27c5d4cc5e754b0cad"
 };
 
+
 const app = initializeApp(firebaseConfig);
+const auth = getAuth(app);
+
+onAuthStateChanged(auth, (user) => {
+  if (!user) {
+    window.location.href = "login.html";
+  }
+});
 const database = getDatabase(app);
 
 const tableBody = document.querySelector("#ordersTable tbody");
@@ -37,3 +46,7 @@ onValue(ref(database, "orders"), (snapshot) => {
     tableBody.innerHTML += row;
   });
 });
+function goHome() {
+  window.location.href = "index.html";
+}
+window.goHome = goHome;

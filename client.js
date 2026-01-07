@@ -19,6 +19,19 @@ const result = document.getElementById("result");
 
 form.addEventListener("submit", (e) => {
   e.preventDefault();
+  const quantity = Number(document.getElementById("quantity").value);
+  const deliveryDate = document.getElementById("deliveryDate").value;
+  const today = new Date().toISOString().split("T")[0];
+
+  if (quantity < 1) {
+    result.textContent = "La quantité doit être au moins 1";
+    return;
+  }
+
+  if (deliveryDate < today) {
+    result.textContent = "La date de livraison est déjà passée";
+    return;
+  }
 
   const order = {
     name: document.getElementById("name").value,
@@ -33,9 +46,14 @@ form.addEventListener("submit", (e) => {
   push(ref(database, "orders"), order)
     .then(() => {
       result.textContent = " Commande envoyée avec succès";
+      document.getElementById("backBtn").style.display = "block";
       form.reset();
     })
     .catch((error) => {
       result.textContent = " Erreur : " + error.message;
     });
 });
+function goHome() {
+  window.location.href = "index.html";
+}
+

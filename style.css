@@ -90,3 +90,32 @@ th {
 tr:nth-child(even) {
   background: #f2f2f2;
 }
+/* ===== RESPONSIVE DESIGN ===== */
+@media (max-width: 768px) {
+
+  .container {
+    width: 90%;
+    margin-top: 40px;
+    padding: 20px;
+  }
+
+  h1, h2 {
+    font-size: 20px;
+  }
+
+  button {
+    font-size: 15px;
+  }
+
+  table {
+    font-size: 12px;
+  }
+
+  th, td {
+    padding: 6px;
+  }
+
+  .home-buttons {
+    flex-direction: column;
+  }
+}

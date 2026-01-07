@@ -2,18 +2,19 @@
 <html lang="fr">
 <head>
   <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Commande Acheteur</title>
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
   <div class="container">
-    <h1>🛒 Commander du poisson frais</h1>
+    <h1>🛒 Poissons et épices chez vous</h1>
 
     <form id="orderForm">
       <input type="text" id="name" placeholder="Nom" required>
       <input type="text" id="product" placeholder="Produit" required>
-      <input type="number" id="quantity" placeholder="Quantité" required>
+      <input type="number" id="quantity" placeholder="Quantité" min="1" required>
       <input type="date" id="deliveryDate" required>
       <input type="text" id="address" placeholder="Adresse" required>
       <input type="tel" id="phone" placeholder="Téléphone" required>
@@ -22,6 +23,10 @@
     </form>
 
     <p id="result"></p>
+    <button id="backBtn" style="display:none;" onclick="goHome()">
+  Retour à l’accueil
+</button>
+
   </div>
 
   <!-- IMPORTANT -->

@@ -3,5 +3,5 @@ function goClient() {
 }
 
 function goAdmin() {
-  window.location.href = "admin.html";
+  window.location.href = "login.html";
 }
