@@ -1,23 +1,184 @@
 <!DOCTYPE html>
-<html>
+<html lang="fr">
 <head>
+    <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Poissonnerie – Accueil</title>
-  <link rel="stylesheet" href="style.css">
+    <title>Mbisi Ya Mayi Epayi Na Bino</title>
+    <link rel="stylesheet" href="style-home.css">
 </head>
 <body>
 
-<div class="container">
-  <h2>Bienvenue à la Poissonnerie 🐟</h2>
-  <p style="text-align:center; color:#555;">
-    Poissons et épices frais – Livraison rapide dans le délai – Qualité garantie
-  </p>
-    <div class="home-buttons">
-        <button onclick="goClient()">Commander</button>
-        <button onclick="goAdmin()">Livraison</button>
-    </div>
-</div>
+    <!-- Header / Navigation -->
+    <header class="header">
+        <div class="container-header">
+            <div class="logo">
+                <span class="logo-icon"></span>
+                <span class="logo-text">Mer et Terre fraiche</span>
+            </div>
+            <nav class="nav">
+                <a href="#produits">Nos Poissons</a>
+                <a href="#prix">Tarifs</a>
+                <a href="#contact">Contact</a>
+            </nav>
+        </div>
+    </header>
 
-<script src="script.js"></script>
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-overlay"></div>
+        <div class="hero-content">
+            <h1 class="hero-title">Poissons Frais & Épices Authentiques</h1>
+            <p class="hero-subtitle">Livraison rapide et qualité garantie partout a Kinshasa</p>
+            <div class="hero-buttons">
+                <button class="btn btn-primary" onclick="goClient()">
+                    <span>🛒 Commander Maintenant</span>
+                </button>
+                <button class="btn btn-secondary" onclick="document.getElementById('prix').scrollIntoView({behavior: 'smooth'})">
+                    <span>💰 Voir les Prix</span>
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Produits Section -->
+    <section id="produits" class="products">
+        <div class="container-main">
+            <h2 class="section-title">Nos Poissons Frais</h2>
+            
+            <div class="products-grid">
+                <!-- Nzombo -->
+                <div class="product-card">
+                    <div class="product-image">
+                        <img src="https://images.unsplash.com/photo-1544943910-4c1dc44aab44?w=500&h=400&fit=crop" alt="Nzombo">
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-name">Nzombo</h3>
+                        <p class="product-description">Poisson d'eau douce du Congo, idéal pour les grillades et plats traditionnels.</p>
+                    </div>
+                </div>
+
+                <!-- Ngolo -->
+                <div class="product-card">
+                    <div class="product-image">
+                        <img src="https://images.unsplash.com/photo-1535591273668-578e31182c4f?w=500&h=400&fit=crop" alt="Ngolo">
+                        <div class="product-badge">⭐ Populaire</div>
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-name">Ngolo</h3>
+                        <p class="product-description">Chair tendre et savoureuse, parfait pour les recettes congolaises.</p>
+                    </div>
+                </div>
+
+                <!-- Épices -->
+                <div class="product-card">
+                    <div class="product-image">
+                        <img src="https://images.unsplash.com/photo-1596040033229-a0b3b83738f6?w=500&h=400&fit=crop" alt="Épices">
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-name">Épices Africaines</h3>
+                        <p class="product-description">Mélange authentique pour sublimer vos poissons, 100% naturel.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="features">
+        <div class="container-main">
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">❄️</div>
+                    <h3>Fraîcheur Garantie</h3>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🚚</div>
+                    <h3>Livraison Rapide</h3>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">⭐</div>
+                    <h3>Qualité Premium</h3>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">💯</div>
+                    <h3>100% Naturel</h3>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Prix Section -->
+    <section id="prix" class="pricing">
+        <div class="container-main">
+            <h2 class="section-title">Nos Tarifs - Livraison Incluse</h2>
+            
+            <div class="pricing-simple">
+                <!-- Nzombo -->
+                <div class="price-card">
+                    <div class="price-icon">🐟</div>
+                    <h3>Nzombo</h3>
+                    <div class="price-amount">25.000 FC</div>
+                    <p class="price-note">Frais • Livraison incluse</p>
+                    <button class="btn btn-primary" onclick="goClient()">Commander</button>
+                </div>
+
+                <!-- Ngolo -->
+                <div class="price-card featured">
+                    <div class="popular-tag">⭐ Populaire</div>
+                    <div class="price-icon">🐠</div>
+                    <h3>Ngolo</h3>
+                    <div class="price-amount">30.000 FC</div>
+                    <p class="price-note">Premium • Livraison incluse</p>
+                    <button class="btn btn-primary" onclick="goClient()">Commander</button>
+                </div>
+
+                <!-- Épices -->
+                <div class="price-card">
+                    <div class="price-icon">🌶️</div>
+                    <h3>Épices</h3>
+                    <div class="price-amount">Sur demande</div>
+                    <p class="price-note">100% naturel</p>
+                    <button class="btn btn-primary" onclick="goClient()">Commander</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta">
+        <div class="container-main">
+            <h2>Prêt à Commander ?</h2>
+            <p>Découvrez nos poissons frais et passez votre commande en quelques clics</p>
+            <div class="cta-buttons">
+                <button class="btn btn-primary btn-large" onclick="goClient()">
+                    🛒 Passer Commande
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container-main">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>🐟 FreshFish Premium</h3>
+                    <p>Poissons frais du Congo</p>
+                </div>
+                <div class="footer-section">
+                    <h4 id="contact">Contact</h4>
+                    <p>+243 81 00 39 894</p>
+                </div>
+                <div class="footer-section">
+                    <button class="btn btn-small" onclick="goAdmin()">🚪 Espace Vendeur</button>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 FreshFish Premium</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
 </body>
 </html>

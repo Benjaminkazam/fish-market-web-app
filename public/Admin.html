@@ -23,12 +23,24 @@
           <th>Date commande</th>
         </tr>
       </thead>
-      <tbody></tbody>
-      <button onclick="goHome()" style="margin-bottom:15px;">
-  ⬅ Retour à l’accueil
-</button>
-
+      <tbody>
+        <tr>
+          <td colspan="7" style="text-align:center; color:#999;">
+            ⏳ Chargement des commandes...
+          </td>
+        </tr>
+      </tbody>
     </table>
+
+    <!-- ✅ ADDED: Logout button -->
+    <div style="display: flex; gap: 10px; margin-top: 20px;">
+      <button onclick="goHome()" style="flex: 1;">
+        ⬅ Retour à l'accueil
+      </button>
+      <button onclick="logout()" style="flex: 1; background: #e74c3c;">
+        🚪 Déconnexion
+      </button>
+    </div>
   </div>
 
   <script type="module" src="admin.js"></script>
