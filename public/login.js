@@ -23,7 +23,7 @@ form.addEventListener("submit", (e) => {
   )
     .then(() => {
       result.textContent = " Connexion réussie";
-      window.location.href = "admin.html";
+      window.location.href = "Admin.html";
     })
     .catch(() => {
       result.textContent = "Email ou mot de passe incorrect";

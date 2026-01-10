@@ -3,14 +3,13 @@ import { initializeApp } from "https://www.gstatic.com/firebasejs/9.23.0/firebas
 import { getDatabase, ref, onValue } from "https://www.gstatic.com/firebasejs/9.23.0/firebase-database.js";
 
 const firebaseConfig = {
-  apiKey: "AIzaSyAm8DR4ul2w-80xfo8uhzpTskaWvO_MwhU",
-  authDomain: "poissonerie-website.firebaseapp.com",
-  databaseURL: "https://poissonerie-website-default-rtdb.firebaseio.com",
-  projectId: "poissonerie-website",
-  storageBucket: "poissonerie-website.appspot.com",
-  messagingSenderId: "305612877784",
-  appId: "1:305612877784:web:71cb27c5d4cc5e754b0cad"
-};
+    apiKey: "AIzaSyDrwr3egZv73PPv9M03ePcZmD_ZPxdSMhw",
+    authDomain: "web-vente.firebaseapp.com",
+    projectId: "web-vente",
+    storageBucket: "web-vente.firebasestorage.app",
+    messagingSenderId: "1061123931906",
+    appId: "1:1061123931906:web:e83483b43ffc44d7aa4c1b"
+  };
 
 
 const app = initializeApp(firebaseConfig);

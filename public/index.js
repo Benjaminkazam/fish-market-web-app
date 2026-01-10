@@ -1,7 +1,7 @@
 document.getElementById("clientBtn").addEventListener("click", () => {
-  window.location.href = "client.html";
+  window.location.href = "Client.html";
 });
 
 document.getElementById("adminBtn").addEventListener("click", () => {
-  window.location.href = "admin.html";
+  window.location.href = "Admin.html";
 });
