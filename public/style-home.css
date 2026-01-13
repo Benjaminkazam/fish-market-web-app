@@ -15,11 +15,35 @@
     --transition: all 0.3s ease;
 }
 
+/* ===== BODY avec effet aquarium subtil ===== */
 body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     line-height: 1.6;
     color: var(--dark-color);
     overflow-x: hidden;
+    background: linear-gradient(to bottom, #f0f8ff, #e6f3ff);
+    position: relative;
+}
+
+/* Effet d'eau ondulante en arrière-plan du body */
+body::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: 
+        radial-gradient(ellipse at 30% 20%, rgba(100, 200, 255, 0.03) 0%, transparent 50%),
+        radial-gradient(ellipse at 70% 80%, rgba(46, 204, 113, 0.03) 0%, transparent 50%);
+    animation: bodyWaterEffect 10s ease-in-out infinite alternate;
+    pointer-events: none;
+    z-index: -1;
+}
+
+@keyframes bodyWaterEffect {
+    0%, 100% { opacity: 0.5; }
+    50% { opacity: 0.8; }
 }
 
 /* ===== HEADER ===== */
@@ -88,11 +112,11 @@ body {
     color: var(--primary-color);
 }
 
-/* ===== HERO SECTION ===== */
+/* ===== HERO SECTION AVEC EFFET AQUARIUM ===== */
 .hero {
     position: relative;
     height: 100vh;
-    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+    background: linear-gradient(to bottom, #001a33, #003366, #004d7a);
     display: flex;
     align-items: center;
     justify-content: center;
@@ -101,6 +125,27 @@ body {
     overflow: hidden;
 }
 
+/* Image de fond du silure en ombre */
+.hero-bg-fish {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    /* REMPLACEZ cette URL par votre vraie image de silure */
+    background: url('https://i.postimg.cc/VOTRE-IMAGE-SILURE.jpg') center/cover;
+    opacity: 0.15;
+    filter: grayscale(20%) brightness(0.8);
+    animation: fishSwim 25s ease-in-out infinite alternate;
+}
+
+@keyframes fishSwim {
+    0% { transform: scale(1) translateX(0); }
+    50% { transform: scale(1.08) translateX(-20px); }
+    100% { transform: scale(1.05) translateX(20px); }
+}
+
+/* Effet de vagues d'eau */
 .hero::before {
     content: '';
     position: absolute;
@@ -108,14 +153,17 @@ body {
     left: 0;
     right: 0;
     bottom: 0;
-    background: url('https://images.unsplash.com/photo-1535591273668-578e31182c4f?w=1920&h=1080&fit=crop') center/cover;
-    opacity: 0.2;
-    animation: slowZoom 20s ease-in-out infinite alternate;
+    background: 
+        radial-gradient(ellipse at 20% 30%, rgba(100, 200, 255, 0.15) 0%, transparent 50%),
+        radial-gradient(ellipse at 80% 70%, rgba(46, 204, 113, 0.15) 0%, transparent 50%),
+        radial-gradient(ellipse at 50% 50%, rgba(30, 144, 255, 0.1) 0%, transparent 60%);
+    animation: waterShimmer 8s ease-in-out infinite;
+    z-index: 1;
 }
 
-@keyframes slowZoom {
-    0% { transform: scale(1); }
-    100% { transform: scale(1.1); }
+@keyframes waterShimmer {
+    0%, 100% { opacity: 0.5; }
+    50% { opacity: 0.8; }
 }
 
 .hero-overlay {
@@ -124,21 +172,200 @@ body {
     left: 0;
     right: 0;
     bottom: 0;
-    background: linear-gradient(135deg, rgba(30,144,255,0.8), rgba(46,204,113,0.8));
+    background: linear-gradient(
+        to bottom,
+        rgba(0, 26, 51, 0.7) 0%,
+        rgba(0, 51, 102, 0.6) 50%,
+        rgba(0, 77, 122, 0.5) 100%
+    );
+    z-index: 1;
+}
+
+/* Bulles d'aquarium */
+.hero::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: 
+        radial-gradient(circle, rgba(255, 255, 255, 0.3) 2px, transparent 2px),
+        radial-gradient(circle, rgba(255, 255, 255, 0.2) 1px, transparent 1px),
+        radial-gradient(circle, rgba(255, 255, 255, 0.25) 3px, transparent 3px);
+    background-size: 
+        200px 300px,
+        150px 250px,
+        180px 280px;
+    background-position: 
+        0 0,
+        50px 50px,
+        100px 25px;
+    animation: bubbles 20s linear infinite;
+    z-index: 2;
+    pointer-events: none;
+}
+
+@keyframes bubbles {
+    0% {
+        background-position: 
+            0 0,
+            50px 50px,
+            100px 25px;
+    }
+    100% {
+        background-position: 
+            0 -300px,
+            50px -250px,
+            100px -280px;
+    }
+}
+
+/* Bulles animées */
+.hero::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: 
+        radial-gradient(circle, rgba(255, 255, 255, 0.3) 2px, transparent 2px),
+        radial-gradient(circle, rgba(255, 255, 255, 0.2) 1px, transparent 1px),
+        radial-gradient(circle, rgba(255, 255, 255, 0.25) 3px, transparent 3px);
+    background-size: 
+        200px 300px,
+        150px 250px,
+        180px 280px;
+    background-position: 
+        0 0,
+        50px 50px,
+        100px 25px;
+    animation: bubbles 20s linear infinite;
+    z-index: 2;
+    pointer-events: none;
+}
+
+@keyframes bubbles {
+    0% {
+        background-position: 
+            0 0,
+            50px 50px,
+            100px 25px;
+    }
+    100% {
+        background-position: 
+            0 -300px,
+            50px -250px,
+            100px -280px;
+    }
+}
+
+/* Bulles individuelles plus grandes */
+.bubble {
+    position: absolute;
+    bottom: -100px;
+    width: 30px;
+    height: 30px;
+    background: radial-gradient(circle at 30% 30%, rgba(255, 255, 255, 0.8), rgba(255, 255, 255, 0.2));
+    border-radius: 50%;
+    opacity: 0.6;
+    animation: riseBubble 10s ease-in infinite;
+    z-index: 2;
+}
+
+.bubble-1 { left: 10%; width: 40px; height: 40px; animation-delay: 0s; animation-duration: 12s; }
+.bubble-2 { left: 25%; width: 25px; height: 25px; animation-delay: 2s; animation-duration: 10s; }
+.bubble-3 { left: 45%; width: 35px; height: 35px; animation-delay: 4s; animation-duration: 14s; }
+.bubble-4 { left: 65%; width: 20px; height: 20px; animation-delay: 1s; animation-duration: 11s; }
+.bubble-5 { left: 80%; width: 30px; height: 30px; animation-delay: 3s; animation-duration: 13s; }
+.bubble-6 { left: 90%; width: 45px; height: 45px; animation-delay: 5s; animation-duration: 15s; }
+
+@keyframes riseBubble {
+    0% {
+        bottom: -100px;
+        opacity: 0;
+        transform: translateX(0);
+    }
+    10% {
+        opacity: 0.6;
+    }
+    90% {
+        opacity: 0.6;
+    }
+    100% {
+        bottom: 110vh;
+        opacity: 0;
+        transform: translateX(50px);
+    }
+}
+
+/* Rayons de lumière qui traversent l'eau */
+.light-rays {
+    position: absolute;
+    top: -50%;
+    left: 0;
+    width: 100%;
+    height: 150%;
+    z-index: 1;
+    pointer-events: none;
+}
+
+.ray {
+    position: absolute;
+    top: -100%;
+    width: 100px;
+    height: 200%;
+    background: linear-gradient(
+        to bottom,
+        rgba(100, 200, 255, 0) 0%,
+        rgba(100, 200, 255, 0.15) 40%,
+        rgba(100, 200, 255, 0.1) 60%,
+        rgba(100, 200, 255, 0) 100%
+    );
+    transform: rotate(-15deg);
+    animation: lightRayMove 15s ease-in-out infinite;
+}
+
+.ray-1 {
+    left: 10%;
+    animation-delay: 0s;
+}
+
+.ray-2 {
+    left: 50%;
+    animation-delay: 5s;
+}
+
+.ray-3 {
+    left: 80%;
+    animation-delay: 10s;
+}
+
+@keyframes lightRayMove {
+    0%, 100% {
+        opacity: 0.2;
+        transform: rotate(-15deg) translateX(0);
+    }
+    50% {
+        opacity: 0.4;
+        transform: rotate(-10deg) translateX(30px);
+    }
 }
 
 .hero-content {
     position: relative;
-    z-index: 2;
+    z-index: 3;
     max-width: 800px;
     padding: 2rem;
-    animation: fadeInUp 1s ease;
+    animation: fadeInUp 1.5s ease;
+    text-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
 }
 
 @keyframes fadeInUp {
     from {
         opacity: 0;
-        transform: translateY(30px);
+        transform: translateY(40px);
     }
     to {
         opacity: 1;
