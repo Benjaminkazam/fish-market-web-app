@@ -25,7 +25,7 @@
 
     <!-- Hero Section -->
     <section class="hero">
-        <div class="hero-bg-fish"></div>
+        <div class="hero-bg-fish parallax-slow"></div>
         <div class="hero-overlay"></div>
         
         <!-- Bulles animées -->
@@ -37,7 +37,7 @@
         <div class="bubble bubble-6"></div>
         
         <!-- Rayons de lumière -->
-        <div class="light-rays">
+        <div class="light-rays parallax-medium">
             <div class="ray ray-1"></div>
             <div class="ray ray-2"></div>
             <div class="ray ray-3"></div>
@@ -179,7 +179,7 @@
                     <div class="price-icon">🌿</div>
                     <h3>Pondu</h3>
                     <div class="price-amount">8.000 FC/kg</div>
-                    <p class="price-note">Feuilles fraîches</p>
+                    <p class="price-note">Pondu Frais</p>
                     <button class="btn btn-primary" onclick="goClient()">Commander</button>
                 </div>
             </div>
@@ -209,7 +209,8 @@
                 </div>
                 <div class="footer-section">
                     <h4 id="contact">Contact</h4>
-                    <p>📱 +243 81 00 39 894</p>
+                    <p>📱 +243 822 811 420</p>
+                    <p>📱 +243 810 039 894</p>
                 </div>
                 <div class="footer-section">
                     <button class="btn btn-small" onclick="goAdmin()">🚪 Espace Vendeur</button>
@@ -222,5 +223,32 @@
     </footer>
 
     <script src="script.js"></script>
+    
+    <!-- Script Parallax -->
+    <script>
+        // Effet Parallax au scroll
+        window.addEventListener('scroll', function() {
+            const scrolled = window.pageYOffset;
+            
+            // Parallax lent pour le fond du poisson
+            const slowElements = document.querySelectorAll('.parallax-slow');
+            slowElements.forEach(el => {
+                el.style.transform = `translateY(${scrolled * 0.3}px)`;
+            });
+            
+            // Parallax moyen pour les rayons de lumière
+            const mediumElements = document.querySelectorAll('.parallax-medium');
+            mediumElements.forEach(el => {
+                el.style.transform = `translateY(${scrolled * 0.5}px)`;
+            });
+            
+            // Parallax rapide pour les bulles
+            const fastElements = document.querySelectorAll('.bubble');
+            fastElements.forEach((el, index) => {
+                const speed = 0.7 + (index * 0.1);
+                el.style.transform = `translateY(${scrolled * speed}px)`;
+            });
+        });
+    </script>
 </body>
 </html>
