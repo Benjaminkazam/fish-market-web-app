@@ -132,8 +132,8 @@ body::before {
     left: 0;
     right: 0;
     bottom: 0;
-    /* REMPLACEZ cette URL par votre vraie image de silure */
-    background: url('https://i.postimg.cc/VOTRE-IMAGE-SILURE.jpg') center/cover;
+    /* ✅ Votre vraie image de silure */
+    background: url('https://i.postimg.cc/xCz2Yw2Y/silure-poisson-chat-1.jpg') center/cover;
     opacity: 0.15;
     filter: grayscale(20%) brightness(0.8);
     animation: fishSwim 25s ease-in-out infinite alternate;

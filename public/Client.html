@@ -9,27 +9,77 @@
 <body>
 
   <div class="container">
-    <h1>🛒 Poissons et épices chez vous</h1>
+    <h1>🛒 Passer une Commande</h1>
 
     <form id="orderForm">
-      <input type="text" id="name" placeholder="Nom" required>
-      <input type="text" id="product" placeholder="Produit" required>
-      <input type="number" id="quantity" placeholder="Quantité" min="1" required>
+      <input type="text" id="name" placeholder="Votre nom complet" required>
+      
+      <select id="product" required>
+        <option value="">-- Sélectionnez un produit --</option>
+        <option value="Silure" data-price="25000">🐟 Silure (25.000 FC/kg)</option>
+        <option value="Viande Fraîche" data-price="15000">🥩 Viande Fraîche (15.000 FC/kg)</option>
+        <option value="Oignons Rouges" data-price="10000">🧅 Oignons Rouges (10.000 FC/kg)</option>
+        <option value="Épices" data-price="10000">🌶️ Épices (10.000 FC/kg)</option>
+        <option value="Pondu" data-price="8000">🌿 Pondu (8.000 FC/kg)</option>
+      </select>
+
+      <input type="number" id="quantity" placeholder="Quantité (kg)" min="1" step="0.5" required>
+
+      <div class="total-display">
+        <span class="total-label">💰 Prix Total :</span>
+        <span class="total-amount" id="totalAmount">0 FC</span>
+      </div>
+
       <input type="date" id="deliveryDate" required>
-      <input type="text" id="address" placeholder="Adresse" required>
-      <input type="tel" id="phone" placeholder="Téléphone" required>
+      <input type="text" id="address" placeholder="Adresse de livraison" required>
+      <input type="tel" id="phone" placeholder="Numéro de téléphone" required>
 
       <button type="submit">Commander</button>
     </form>
 
     <p id="result"></p>
     <button id="backBtn" style="display:none;" onclick="goHome()">
-  Retour à l’accueil
-</button>
-
+      Retour à l'accueil
+    </button>
   </div>
 
-  <!-- IMPORTANT -->
+  <!-- Modal de Confirmation -->
+  <div id="confirmModal" class="modal">
+    <div class="modal-content">
+      <h2>🛒 Confirmation de Commande</h2>
+      <div class="modal-body">
+        <p class="greeting">Bonjour <strong id="modalName"></strong>,</p>
+        
+        <div class="order-summary">
+          <h3>Votre commande :</h3>
+          <ul>
+            <li>• Produit : <strong id="modalProduct"></strong></li>
+            <li>• Quantité : <strong id="modalQuantity"></strong> kg</li>
+            <li>• Prix unitaire : <strong id="modalPricePerKg"></strong> FC/kg</li>
+          </ul>
+          
+          <div class="total-line">
+            <span>💰 TOTAL :</span>
+            <strong id="modalTotal"></strong>
+          </div>
+          <p class="delivery-note">(Livraison incluse)</p>
+          
+          <hr>
+          
+          <p>Livraison le : <strong id="modalDate"></strong></p>
+          <p>Adresse : <strong id="modalAddress"></strong></p>
+        </div>
+        
+        <p class="confirm-question">Confirmer cette commande ?</p>
+      </div>
+      
+      <div class="modal-buttons">
+        <button class="btn-confirm" onclick="confirmOrder()">✅ Confirmer</button>
+        <button class="btn-cancel" onclick="cancelOrder()">❌ Annuler</button>
+      </div>
+    </div>
+  </div>
+
   <script type="module" src="client.js"></script>
 </body>
 </html>

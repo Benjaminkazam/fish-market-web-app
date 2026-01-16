@@ -15,17 +15,21 @@ const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
 const database = getDatabase(app);
 
-// ✅ FIXED: Authentication enabled - redirects to login if not logged in
+// ✅ Authentication enabled
 onAuthStateChanged(auth, (user) => {
   if (!user) {
     window.location.href = "login.html";
   } else {
-    // User is logged in, load orders
     loadOrders();
   }
 });
 
 const tableBody = document.querySelector("#ordersTable tbody");
+
+// Format prix avec séparateur
+function formatPrice(price) {
+  return price.toFixed(0).replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+}
 
 function loadOrders() {
   onValue(ref(database, "orders"), (snapshot) => {
@@ -34,7 +38,7 @@ function loadOrders() {
     if (!snapshot.exists()) {
       tableBody.innerHTML = `
         <tr>
-          <td colspan="7" style="text-align:center; color:#999;">
+          <td colspan="9" style="text-align:center; color:#999;">
             Aucune commande pour le moment
           </td>
         </tr>
@@ -42,7 +46,7 @@ function loadOrders() {
       return;
     }
 
-    // ✅ IMPROVEMENT: Sort orders by date (newest first)
+    // Convertir en array et trier
     const orders = [];
     snapshot.forEach(child => {
       orders.push({
@@ -51,15 +55,25 @@ function loadOrders() {
       });
     });
 
-    // Sort by createdAt (newest first)
-    orders.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
+    // Trier par date (plus récent en premier)
+    orders.sort((a, b) => {
+      const dateA = new Date(a.createdAt.split(' ')[0].split('/').reverse().join('-'));
+      const dateB = new Date(b.createdAt.split(' ')[0].split('/').reverse().join('-'));
+      return dateB - dateA;
+    });
 
+    // Afficher les commandes
     orders.forEach(o => {
+      const pricePerKg = o.pricePerKg || 0;
+      const totalPrice = o.totalPrice || (pricePerKg * (o.quantity || 0));
+      
       const row = `
         <tr>
           <td>${o.name || '-'}</td>
           <td>${o.product || '-'}</td>
-          <td>${o.quantity || '-'}</td>
+          <td>${o.quantity || '-'} kg</td>
+          <td>${formatPrice(pricePerKg)} FC</td>
+          <td style="font-weight: bold; color: #2ecc71;">${formatPrice(totalPrice)} FC</td>
           <td>${o.deliveryDate || '-'}</td>
           <td>${o.address || '-'}</td>
           <td>${o.phone || '-'}</td>
@@ -72,7 +86,7 @@ function loadOrders() {
     console.error("Error loading orders:", error);
     tableBody.innerHTML = `
       <tr>
-        <td colspan="7" style="text-align:center; color:red;">
+        <td colspan="9" style="text-align:center; color:red;">
           ❌ Erreur de chargement des commandes
         </td>
       </tr>
@@ -93,6 +107,5 @@ function logout() {
   });
 }
 
-// ✅ FIXED: Proper way to expose functions to HTML onclick
 window.goHome = goHome;
 window.logout = logout;
