@@ -1,5 +1,5 @@
 import { initializeApp } from "https://www.gstatic.com/firebasejs/9.23.0/firebase-app.js";
-import { getDatabase, ref, push } from "https://www.gstatic.com/firebasejs/9.23.0/firebase-database.js";
+import { getDatabase, ref, push, onValue } from "https://www.gstatic.com/firebasejs/9.23.0/firebase-database.js";
 
 const firebaseConfig = {
     apiKey: "AIzaSyDrwr3egZv73PPv9M03ePcZmD_ZPxdSMhw",
@@ -23,6 +23,30 @@ const modal = document.getElementById("confirmModal");
 
 // Variable globale pour stocker la commande temporaire
 let pendingOrder = null;
+
+// ===== CHARGEMENT DYNAMIQUE DES PRODUITS =====
+onValue(ref(database, "products"), (snapshot) => {
+  // Garder l'option par défaut
+  productSelect.innerHTML = '<option value="">-- Sélectionnez un produit --</option>';
+
+  if (!snapshot.exists()) {
+    productSelect.innerHTML += '<option value="" disabled>Aucun produit disponible</option>';
+    return;
+  }
+
+  snapshot.forEach(child => {
+    const product = child.val();
+    
+    // N'afficher que les produits actifs
+    if (product.active !== false) {
+      const option = document.createElement('option');
+      option.value = product.name;
+      option.setAttribute('data-price', product.price);
+      option.textContent = `${product.icon || '📦'} ${product.name} (${formatPrice(product.price)} FC/kg)`;
+      productSelect.appendChild(option);
+    }
+  });
+});
 
 // ===== CALCUL AUTOMATIQUE DU PRIX =====
 function calculateTotal() {
@@ -98,6 +122,7 @@ form.addEventListener("submit", (e) => {
     deliveryDate: deliveryDate,
     address: address,
     phone: phone,
+    status: 'En attente',
     createdAt: new Date().toLocaleString('fr-FR', { 
       dateStyle: 'short', 
       timeStyle: 'short' 
